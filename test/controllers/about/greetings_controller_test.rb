@@ -12,4 +12,11 @@ class About::GreetingsControllerTest < ActionDispatch::IntegrationTest
     get about_greet_me_url(greet_me_params)
     assert_response 200
   end
+
+  test 'should return not found page if greetings is invalid' do
+    greet_me_params = { greet_me: 'invalid_greetings' }
+
+    get about_greet_me_url(greet_me_params)
+    assert_response 404
+  end
 end
