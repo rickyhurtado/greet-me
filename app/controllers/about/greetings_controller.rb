@@ -6,12 +6,22 @@ module About
       page_title = 'Greet Me'
       site_title = "About | Greetings | Good #{greet_me}!"
 
-      render locals: {
-        site_title: site_title,
-        page_title: page_title,
-        greet_me: greet_me,
-        status: status
-      }, status: status
+      respond_to do |format|
+        format.html {
+          render locals: {
+            site_title: site_title,
+            page_title: page_title,
+            greet_me: greet_me,
+            status: status
+          }, status: status
+        }
+        format.js {
+          render locals: {
+            greet_me: greet_me,
+            status: status
+          }, status: response.status
+        }
+      end
     end
 
     private
