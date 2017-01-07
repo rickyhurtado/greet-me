@@ -6,6 +6,6 @@ class GreetingsHelperTest < ActionView::TestCase
   end
 
   test 'should return invalid greetings' do
-    assert_equal 'You have an invalid greetings!', display_greetings('invalid_greetings', 404)
+    assert_equal 'You have an invalid greeting!', display_greetings('invalid_greetings', 404)
   end
 end
