@@ -1,0 +1,14 @@
+craig:
+  email: 'calexander@example.com'
+  full_name: 'Craig Alexander'
+  gender: 'm'
+
+mirinda:
+  email: 'mcarfrae@example.com'
+  full_name: 'Mirinda Carfrae'
+  gender: 'f'
+
+daniela:
+  email: 'dryf@example.com'
+  full_name: 'Daniela Ryf'
+  gender: 'f'
