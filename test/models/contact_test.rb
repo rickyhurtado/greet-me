@@ -3,6 +3,11 @@ require 'test_helper'
 class ContactTest < ActiveSupport::TestCase
   setup do
     @craig = contacts(:craig)
+    swim = interests(:swim)
+    bike = interests(:bike)
+    run = interests(:run)
+
+    @craig.interests << [swim, bike, run]
   end
 
   test '.males' do

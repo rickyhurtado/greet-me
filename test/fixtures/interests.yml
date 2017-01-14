@@ -1,11 +1,8 @@
-craig_swim:
+swim:
   name: 'Swim'
-  contact: craig
 
-craig_bike:
+bike:
   name: 'Bike'
-  contact: craig
 
-craig_run:
+run:
   name: 'Run'
-  contact: craig
