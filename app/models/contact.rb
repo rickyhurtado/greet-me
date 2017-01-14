@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
 
-  has_many :interests, dependent: :destroy
+  has_and_belongs_to_many :interests
 
   scope :gender, -> (gender) { where(gender: gender) }
   scope :males, -> { gender('m') }

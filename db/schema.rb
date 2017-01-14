@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107083020) do
+ActiveRecord::Schema.define(version: 20170114073003) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "email"
@@ -21,12 +21,19 @@ ActiveRecord::Schema.define(version: 20170107083020) do
     t.index ["email"], name: "index_contacts_on_email"
   end
 
+  create_table "contacts_interests", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "interest_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["contact_id"], name: "index_contacts_interests_on_contact_id"
+    t.index ["interest_id"], name: "index_contacts_interests_on_interest_id"
+  end
+
   create_table "interests", force: :cascade do |t|
     t.string   "name"
-    t.integer  "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contact_id"], name: "index_interests_on_contact_id"
   end
 
 end
