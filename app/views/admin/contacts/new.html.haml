@@ -1,13 +1,15 @@
 %h1 New Contact (for admin use only)
 
+= render 'shared/flash_messages'
+
 = form_for contact, url: admin_contacts_url do |f|
   %p
     = f.label :full_name, 'Full Name: '
-    = f.text_field :full_name, placeholder: 'Your Full Name'
+    = f.text_field :full_name, value: contact[:full_name], placeholder: 'Your Full Name', class: ('error' if contact.errors[:full_name]), required: true
   %p
     = f.label :email, 'Email: '
-    = f.email_field :email, placeholder: 'Your Email Address'
+    = f.email_field :email, value: contact[:email], placeholder: 'Your Email Address', class: ('error' if contact.errors[:email]), required: true
   %p
-    = f.submit 'Create Contact'
+    = f.submit 'Submit'
 
 - content_for :title, 'New Contact'
