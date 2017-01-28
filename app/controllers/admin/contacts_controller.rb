@@ -5,5 +5,11 @@ module Admin
 
       render locals: { contacts: contacts }
     end
+
+    def new
+      contact = Contact.new
+
+      render locals: { contact: contact }
+    end
   end
 end

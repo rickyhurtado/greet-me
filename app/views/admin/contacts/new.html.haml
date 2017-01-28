@@ -1,0 +1,13 @@
+%h1 New Contact (for admin use only)
+
+= form_for contact, url: admin_contacts_url do |f|
+  %p
+    = f.label :full_name, 'Full Name: '
+    = f.text_field :full_name, placeholder: 'Your Full Name'
+  %p
+    = f.label :email, 'Email: '
+    = f.email_field :email, placeholder: 'Your Email Address'
+  %p
+    = f.submit 'Create Contact'
+
+- content_for :title, 'New Contact'
