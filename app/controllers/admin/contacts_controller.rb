@@ -1,5 +1,7 @@
 module Admin
   class ContactsController < ApplicationController
+    before_action :set_contact, only: [:update, :destroy]
+
     def index
       contacts = Contact.all
 
@@ -37,18 +39,30 @@ module Admin
     end
 
     def update
-      contact = Contact.find(params[:id])
-
-      if contact.update(contact_params)
+      if @contact.update(contact_params)
         flash[:success_message] = 'Contact has been updated.'
-        redirect_to edit_admin_contact_url(contact)
+        redirect_to edit_admin_contact_url(@contact)
+      else
+        flash.now[:error] = @contact.errors
+        render :edit, locals: { contact: @contact }, status: 400
+      end
+    end
+
+    def destroy
+      if @contact.destroy
+        flash[:success_message] = "#{@contact.full_name} has been deleted."
+        redirect_to admin_contacts_url
       else
         flash.now[:error] = contact.errors
-        render :edit, locals: { contact: contact }, status: 400
+        render :index, status: 400
       end
     end
 
     private
+
+      def set_contact
+        @contact = Contact.find(params[:id])
+      end
 
       def contact_params
         params.require(:contact).permit(:email, :full_name)

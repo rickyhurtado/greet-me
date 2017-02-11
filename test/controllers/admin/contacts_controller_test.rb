@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @craig = contacts(:craig)
+  end
+
   test 'should get the admin contacts page' do
     get admin_contacts_url
     assert_response 200
@@ -26,16 +30,12 @@ class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
     post admin_contacts_url, params: { contact: { email: 'email@test.com', full_name: '' } }
     assert_response 400
 
-    craig = contacts(:craig)
-
-    post admin_contacts_url, params: { contact: { email: craig.email, full_name: 'Fullname Lastname' } }
+    post admin_contacts_url, params: { contact: { email: @craig.email, full_name: 'Fullname Lastname' } }
     assert_response 400
   end
 
   test 'should show the contact' do
-    craig = contacts(:craig)
-
-    get edit_admin_contact_path(craig)
+    get edit_admin_contact_path(@craig)
     assert_response 200
   end
 
@@ -45,23 +45,28 @@ class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update contact' do
-    craig = contacts(:craig)
-
-    patch admin_contact_url(craig), params: { contact: { email: 'email_new@test.com' } }
+    patch admin_contact_url(@craig), params: { contact: { email: 'email_new@test.com' } }
     assert_response 302
   end
 
   test 'should not update contact' do
-    craig = contacts(:craig)
     mirinda = contacts(:mirinda)
 
-    patch admin_contact_url(craig), params: { contact: { email: '' } }
+    patch admin_contact_url(@craig), params: { contact: { email: '' } }
     assert_response 400
 
-    patch admin_contact_url(craig), params: { contact: { email: mirinda.email } }
+    patch admin_contact_url(@craig), params: { contact: { email: mirinda.email } }
     assert_response 400
 
-    patch admin_contact_url(craig), params: { contact: { full_name: '' } }
+    patch admin_contact_url(@craig), params: { contact: { full_name: '' } }
     assert_response 400
+  end
+
+  test 'should destroy contact' do
+    assert_difference('Contact.count', -1) do
+      delete admin_contact_url(@craig)
+    end
+
+    assert_response 302
   end
 end
