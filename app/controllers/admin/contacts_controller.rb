@@ -25,6 +25,17 @@ module Admin
       end
     end
 
+    def edit
+      contact = Contact.where(id: params[:id])
+
+      if contact.any?
+        render locals: { contact: contact.first }
+      else
+        flash[:not_found] = 'Contact not found.'
+        render file: 'public/404.html', status: :not_found, layout: false
+      end
+    end
+
     private
 
       def contact_params

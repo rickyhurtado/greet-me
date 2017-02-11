@@ -31,4 +31,16 @@ class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
     post admin_contacts_url, contact: { email: craig.email, full_name: 'Fullname Lastname' }
     assert_response 400
   end
+
+  test 'should show the contact' do
+    craig = contacts(:craig)
+
+    get edit_admin_contact_path(craig)
+    assert_response 200
+  end
+
+  test 'should show page not found when contact does not exist' do
+    get edit_admin_contact_path(0)
+    assert_response 404
+  end
 end
