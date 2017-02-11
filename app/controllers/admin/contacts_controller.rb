@@ -36,6 +36,18 @@ module Admin
       end
     end
 
+    def update
+      contact = Contact.find(params[:id])
+
+      if contact.update(contact_params)
+        flash[:success_message] = 'Contact has been updated.'
+        redirect_to edit_admin_contact_url(contact)
+      else
+        flash.now[:error] = contact.errors
+        render :edit, locals: { contact: contact }, status: 400
+      end
+    end
+
     private
 
       def contact_params

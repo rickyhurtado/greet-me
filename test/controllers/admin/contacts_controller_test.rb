@@ -43,4 +43,25 @@ class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
     get edit_admin_contact_path(0)
     assert_response 404
   end
+
+  test 'should update contact' do
+    craig = contacts(:craig)
+
+    patch admin_contact_url(craig), params: { contact: { email: 'email_new@test.com' } }
+    assert_response 302
+  end
+
+  test 'should not update contact' do
+    craig = contacts(:craig)
+    mirinda = contacts(:mirinda)
+
+    patch admin_contact_url(craig), params: { contact: { email: '' } }
+    assert_response 400
+
+    patch admin_contact_url(craig), params: { contact: { email: mirinda.email } }
+    assert_response 400
+
+    patch admin_contact_url(craig), params: { contact: { full_name: '' } }
+    assert_response 400
+  end
 end
