@@ -21,7 +21,7 @@ module Admin
         redirect_to new_admin_contact_url
       else
         flash.now[:error] = contact.errors
-        render :new, locals: { contact: contact }
+        render :new, locals: { contact: contact }, status: 400
       end
     end
 
