@@ -1,6 +1,7 @@
 module Admin
   class ContactsController < ApplicationController
     before_action :set_contact, only: [:update, :destroy]
+    before_action :get_contact, only: [:show, :edit]
 
     def index
       contacts = Contact.all
@@ -27,14 +28,19 @@ module Admin
       end
     end
 
-    def edit
-      contact = Contact.where(id: params[:id])
-
-      if contact.any?
-        render locals: { contact: contact.first }
+    def show
+      if @contact.any?
+        render locals: { contact: @contact.first }
       else
-        flash[:not_found] = 'Contact not found.'
-        render file: 'public/404.html', status: :not_found, layout: false
+        show_page_not_found
+      end
+    end
+
+    def edit
+      if @contact.any?
+        render locals: { contact: @contact.first }
+      else
+        show_page_not_found
       end
     end
 
@@ -62,6 +68,10 @@ module Admin
 
       def set_contact
         @contact = Contact.find(params[:id])
+      end
+
+      def get_contact
+        @contact = Contact.where(id: params[:id])
       end
 
       def contact_params

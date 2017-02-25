@@ -23,6 +23,11 @@ class Admin::ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response 302
   end
 
+  test 'should show the admin contact' do
+    get admin_contact_url(@craig.id)
+    assert_response 200
+  end
+
   test 'should return error on contact creation' do
     post admin_contacts_url, params: { contact: { email: '', full_name: 'Fullname Lastname' } }
     assert_response 400

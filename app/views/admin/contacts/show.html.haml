@@ -1,0 +1,10 @@
+%h1 Contact (for admin use only)
+
+%p
+  %strong Full name:
+  = contact.full_name
+%p
+  %strong Email:
+  = contact.email
+
+- content_for :title, "Contact: #{contact.full_name}"
