@@ -1,5 +1,5 @@
 %p
-  = link_to admin_contacts_url do
+  = link_to admin_contacts_url, class: 'js-view-contacts-button' do
     = button_tag 'View Contacts'
 
   - if defined?(contact) && contact.id.present?
