@@ -7,3 +7,8 @@
     = f.email_field :email, value: contact[:email], placeholder: 'Your Email Address', class: ('error' if contact.errors[:email]), required: true
   %p
     = f.submit 'Submit'
+
+    - if contact.id.present?
+      = link_to admin_contact_url(contact.id), method: :delete, data: { confirm: "Delete #{contact.full_name}?" } do
+        = button_tag(type: 'button') do
+          Delete
