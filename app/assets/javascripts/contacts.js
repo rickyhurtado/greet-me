@@ -29,6 +29,15 @@ SampleRailsApp.Contacts.Utils = {
       $('.js-edit-contact').remove();
       $('.js-view-contact').show();
     });
+  },
+
+  alertMessage: function(message){
+    alert(message);
   }
 };
 
+$(function(){
+  $(document).on('click', '.js-submit-contact-form', function(){
+    $(this).closest('form').attr('disabled', true);
+  });
+});

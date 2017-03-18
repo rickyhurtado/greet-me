@@ -53,7 +53,11 @@ module Admin
     def update
       if @contact.update(contact_params)
         flash[:success_message] = 'Contact has been updated.'
-        redirect_to edit_admin_contact_url(@contact)
+
+        respond_to do |format|
+          format.html { redirect_to edit_admin_contact_url(@contact) }
+          format.js { render locals: { success_message: flash[:success_message]} }
+        end
       else
         flash.now[:error] = @contact.errors
         render :edit, locals: { contact: @contact }, status: 400
