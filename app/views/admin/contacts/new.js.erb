@@ -1,0 +1,5 @@
+var contactListPartial = "<%= j render(partial: 'admin/contacts/contact_list', locals: { contacts: contacts }) %>";
+var message = "<%= j success_message %>";
+
+SampleRailsApp.Contacts.Utils.contactList(contactListPartial, true);
+setTimeout(function(){ SampleRailsApp.Contacts.Utils.alertMessage(message); }, 300);

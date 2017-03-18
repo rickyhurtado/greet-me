@@ -21,7 +21,11 @@ module Admin
       # See validations on person model
       if contact.save
         flash[:success_message] = "New contact has been created. <a href=\"#{ edit_admin_contact_url(contact)}\">View this contact.</a>"
-        redirect_to new_admin_contact_url
+
+        respond_to do |format|
+          format.html { redirect_to new_admin_contact_url }
+          format.js
+        end
       else
         flash.now[:error] = contact.errors
         render :new, locals: { contact: contact }, status: 400
