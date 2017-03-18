@@ -1,9 +1,5 @@
 %h1 Edit Contact (for admin use only)
 
-= render 'back_to_contacts', contact: contact
-
-= render 'shared/flash_messages'
-
-= render 'form', contact: contact, form_url: admin_contact_url(contact), method: :patch
+= render 'edit', contact: contact
 
 - content_for :title, 'Edit Contact'

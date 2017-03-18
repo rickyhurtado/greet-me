@@ -3,5 +3,5 @@
     = button_tag 'View Contacts'
 
   - if defined?(contact) && contact.id.present?
-    = link_to admin_contact_url(contact.id) do
+    = link_to admin_contact_url(contact.id), class: 'js-back-button' do
       = button_tag 'Back'

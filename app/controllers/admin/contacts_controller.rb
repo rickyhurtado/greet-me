@@ -41,7 +41,10 @@ module Admin
 
     def edit
       if @contact.any?
-        render locals: { contact: @contact.first }
+        respond_to do |format|
+          format.html { render locals: { contact: @contact.first } }
+          format.js { render locals: { contact: @contact.first } }
+        end
       else
         show_page_not_found
       end

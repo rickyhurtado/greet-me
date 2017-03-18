@@ -9,7 +9,7 @@
     = contact.email
 
   %p
-    = link_to edit_admin_contact_url(contact.id) do
+    = link_to edit_admin_contact_url(contact.id), data: { remote: true } do
       = button_tag(type: 'button') do
         Edit
     = link_to admin_contact_url(contact.id), method: :delete, data: { confirm: "Delete #{contact.full_name}?" } do

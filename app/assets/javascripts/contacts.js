@@ -4,13 +4,30 @@ SampleRailsApp.Contacts = {};
 
 SampleRailsApp.Contacts.Utils = {
   showContact: function(content){
-    $('.js-contact-list').hide().after(contactShowPartial);
+    $('.js-contact-list').hide().after(content);
+    this.viewContactButton();
+  },
 
-    $('.js-view-contacts-button').on('click', function(e){
+  viewContactButton: function(){
+    $(document).on('click', '.js-view-contacts-button', function(e){
       e.preventDefault();
 
-      $('.js-view-contact').remove();
+      $('.js-view-contact, .js-edit-contact').remove();
       $('.js-contact-list').show();
+    });
+  },
+
+  editContact: function(content){
+    $('.js-view-contact').hide().after(content);
+    this.backButton();
+  },
+
+  backButton: function(){
+    $('.js-back-button').on('click', function(e){
+      e.preventDefault();
+
+      $('.js-edit-contact').remove();
+      $('.js-view-contact').show();
     });
   }
 };
