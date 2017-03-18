@@ -52,11 +52,14 @@ module Admin
 
     def update
       if @contact.update(contact_params)
-        flash[:success_message] = 'Contact has been updated.'
+        message = 'Contact has been updated.'
 
         respond_to do |format|
-          format.html { redirect_to edit_admin_contact_url(@contact) }
-          format.js { render locals: { success_message: flash[:success_message]} }
+          format.html {
+            flash[:success_message] = message
+            redirect_to edit_admin_contact_url(@contact)
+          }
+          format.js { render locals: { contacts: Contact.all, success_message: message } }
         end
       else
         flash.now[:error] = @contact.errors
@@ -66,8 +69,15 @@ module Admin
 
     def destroy
       if @contact.destroy
-        flash[:success_message] = "#{@contact.full_name} has been deleted."
-        redirect_to admin_contacts_url
+        message = "#{@contact.full_name} has been deleted."
+
+        respond_to do |format|
+          format.html {
+            flash[:success_message] = message
+            redirect_to admin_contacts_url
+          }
+          format.js { render locals: { contacts: Contact.all, success_message: message} }
+        end
       else
         flash.now[:error] = contact.errors
         render :index, status: 400

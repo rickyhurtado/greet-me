@@ -33,6 +33,24 @@ SampleRailsApp.Contacts.Utils = {
 
   alertMessage: function(message){
     alert(message);
+  },
+
+  contactList: function(content, hide) {
+    var contacts = $('.js-contact-list');
+
+    if (contacts.size() > 0){
+      contacts.after(content).remove();
+
+      if (hide){
+        $('.js-contact-list').hide();
+      }
+    } else {
+      window.location = '/admin/contacts';
+    }
+  },
+
+  deleteContact: function(){
+    $('.js-view-contact, .js-edit-contact').remove();
   }
 };
 

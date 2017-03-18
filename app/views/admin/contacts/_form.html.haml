@@ -9,6 +9,6 @@
     = f.submit 'Submit', class: 'js-submit-contact-form'
 
     - if contact.id.present?
-      = link_to admin_contact_url(contact.id), method: :delete, data: { confirm: "Delete #{contact.full_name}?" } do
+      = link_to admin_contact_url(contact.id), method: :delete, data: { remote: true, confirm: "Delete #{contact.full_name}?" } do
         = button_tag(type: 'button') do
           Delete
